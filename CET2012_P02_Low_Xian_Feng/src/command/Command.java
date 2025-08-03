@@ -1,5 +1,7 @@
 package command;
 
+import core.CustomException;
+
 public interface Command {
-    void execute();
+    void execute() throws CustomException;
 }
