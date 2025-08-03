@@ -1,0 +1,6 @@
+*.class
+*.log
+*.tmp
+*.swp
+out
+bin
