@@ -4,3 +4,5 @@
 *.swp
 out
 bin
+.idea
+*.iml
