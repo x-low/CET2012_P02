@@ -6,11 +6,11 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-public class Registry {
+public class EmployeeRegistry {
     private ArrayList<String> dataStore;
     private static final String dataStorePath = "src/dataStore.txt";
 
-    public Registry() throws CustomException {
+    public EmployeeRegistry() throws CustomException {
         dataStore = new ArrayList<>();
         File data =  new File(dataStorePath);
 
