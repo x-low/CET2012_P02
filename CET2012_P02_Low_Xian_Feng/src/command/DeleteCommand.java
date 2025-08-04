@@ -15,14 +15,10 @@ public class DeleteCommand implements Command {
 
     @Override
     public void execute() throws CustomException {
-        registry.delete(this, index);
+        this.deletedEntry = registry.delete(index);
     }
 
     public void undo() {
         registry.insert(index, this.deletedEntry);
-    }
-
-    public void setDeletedEntry(String deletedEntry) {
-        this.deletedEntry = deletedEntry;
     }
 }
