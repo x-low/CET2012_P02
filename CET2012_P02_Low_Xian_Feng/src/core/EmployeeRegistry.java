@@ -11,10 +11,11 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class EmployeeRegistry {
-    private ArrayList<String> dataStore;
+    private final ArrayList<String> dataStore;
     private static final String dataStorePath =
             System.getProperty("user.dir") +
                     "/CET2012_P02_Low_Xian_Feng/src/dataStore.txt";
+    // try local regex portion ^[^.\-](?!.*[.\-]{2})[\w.\-]*(?<![.\-])$
 
     public EmployeeRegistry() throws CustomException {
         dataStore = new ArrayList<>();
