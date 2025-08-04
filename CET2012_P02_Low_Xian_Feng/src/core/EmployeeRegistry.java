@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class EmployeeRegistry {
     private ArrayList<String> dataStore;
-    private static final String dataStorePath = "src/dataStore.txt";
-    private static final Pattern emailPolicy =
-            Pattern.compile("^[^(.-)][a-zA-Z._-]")
+    private static final String dataStorePath =
+            System.getProperty("user.dir") +
+                    "/CET2012_P02_Low_Xian_Feng/src/dataStore.txt";
 
     public EmployeeRegistry() throws CustomException {
         dataStore = new ArrayList<>();
@@ -57,20 +57,13 @@ public class EmployeeRegistry {
     }
 
     public void add(String[] data) {
-        StringBuilder line;
-
-        line.append(String.format("%0%d", dataStore.size()))
-                .append(". ")
-                .append(data[0])
-                .append(" ")
-                .append(data[1])
-                .append(" ")
-                .append(data[2]);
+        String line = String.format("%02d", dataStore.size() + 1) +
+                ". " + data[0] + " " + data[1] + " " + data[2];
         dataStore.add(line);
     }
 
     public void deleteLastEntry() {
-        dataStore.remove(dataStore.size() - 1);
+        dataStore.removeLast();
     }
 
 }
