@@ -2,6 +2,8 @@ package command;
 import core.CustomException;
 import core.EmployeeRegistry;
 
+import java.util.Stack;
+
 public class AddCommand implements Command {
     private final EmployeeRegistry registry;
     private final String[] data;
@@ -13,8 +15,9 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void execute() throws CustomException {
+    public void execute(Stack<Command> history) throws CustomException {
         registry.add(data);
+        history.push(this);
     }
 
     public void undo() {
