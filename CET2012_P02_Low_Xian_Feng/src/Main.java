@@ -12,6 +12,8 @@ public class Main {
         }
         registry.add(new String[]{"first", "last", "email"});
         registry.add(new String[]{"second", "last", "email"});
+        registry.add(new String[]{"third", "last", "email"});
+        registry.delete(null, "2");
 
         try {
             registry.storeToFile();

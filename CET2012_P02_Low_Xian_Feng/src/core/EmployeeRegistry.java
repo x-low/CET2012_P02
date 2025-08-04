@@ -1,4 +1,7 @@
 package core;
+import command.Command;
+import command.DeleteCommand;
+
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -64,6 +67,39 @@ public class EmployeeRegistry {
 
     public void deleteLastEntry() {
         dataStore.removeLast();
+    }
+
+    public void delete(DeleteCommand cmd, String index) {
+        try {
+            int idx = Integer.parseInt(index);
+            String deletedEntry = dataStore.get(idx - 1);
+            dataStore.remove(idx - 1);
+            if (cmd != null)
+                cmd.setDeletedEntry(deletedEntry);
+            for (int i = idx - 1; i < dataStore.size(); i++) {
+                String entry = dataStore.get(i);
+                String[] split = entry.split("\\.");
+                String newEntry = String.format("%02d.", idx) + split[1];
+                dataStore.set(i, newEntry);
+            }
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void insert(String index, String data) {
+        try {
+            int idx = Integer.parseInt(index);
+            dataStore.add(idx - 1, data);
+            for (int i = idx; i < dataStore.size(); i++) {
+                String entry = dataStore.get(i);
+                String[] split = entry.split("\\.");
+                String newEntry = String.format("%02d.", idx) + split[1];
+                dataStore.set(i, newEntry);
+            }
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
