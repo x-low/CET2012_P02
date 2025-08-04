@@ -2,7 +2,7 @@ package command;
 import core.CustomException;
 import core.EmployeeRegistry;
 
-public class AddCommand implements UndoableCommand {
+public class AddCommand implements Command {
     private final EmployeeRegistry registry;
     private final String[] data;
 
@@ -17,7 +17,6 @@ public class AddCommand implements UndoableCommand {
         registry.add(data);
     }
 
-    @Override
     public void undo() {
         registry.deleteLastEntry();
     }

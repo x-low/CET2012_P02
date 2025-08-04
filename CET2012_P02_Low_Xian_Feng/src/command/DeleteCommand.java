@@ -3,7 +3,7 @@ package command;
 import core.CustomException;
 import core.EmployeeRegistry;
 
-public class DeleteCommand implements UndoableCommand {
+public class DeleteCommand implements Command {
     private final EmployeeRegistry registry;
     private final String index;
     private String deletedEntry;
