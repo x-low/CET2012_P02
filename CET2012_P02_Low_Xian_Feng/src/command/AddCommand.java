@@ -1,7 +1,7 @@
 package command;
+
 import core.CustomException;
 import core.EmployeeRegistry;
-
 import java.util.Stack;
 
 public class AddCommand implements Command {
@@ -20,6 +20,7 @@ public class AddCommand implements Command {
         history.push(this);
     }
 
+    @Override
     public void undo() {
         registry.deleteLastEntry();
     }
