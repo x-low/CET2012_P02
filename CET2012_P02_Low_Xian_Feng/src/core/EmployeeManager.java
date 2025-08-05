@@ -67,7 +67,7 @@ public class EmployeeManager {
             for (int i = idx; i < dataStore.size(); i++) {
                 String entry = dataStore.get(i);
                 String[] split = entry.split("\\.");
-                String newEntry = String.format("%02d.", idx) + split[1];
+                String newEntry = String.format("%02d.", i + 1) + split[1];
                 dataStore.set(i, newEntry);
             }
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
