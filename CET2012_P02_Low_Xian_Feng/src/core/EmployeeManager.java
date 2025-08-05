@@ -88,7 +88,6 @@ public class EmployeeManager {
         if (dataStore.isEmpty())
             throw new CustomException("Error: Nothing to list");
         dataStore.forEach(System.out::println);
-        System.out.println();
     }
 
     public String update(String[] data) throws CustomException {
