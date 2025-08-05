@@ -1,6 +1,4 @@
 package core;
-import command.Command;
-import command.DeleteCommand;
 
 import java.io.File;
 import java.io.BufferedReader;

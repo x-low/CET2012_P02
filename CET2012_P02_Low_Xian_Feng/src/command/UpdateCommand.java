@@ -3,37 +3,29 @@ package command;
 import core.CustomException;
 import core.EmployeeManager;
 
-import java.util.Stack;
-
 public class UpdateCommand implements Command {
     private final EmployeeManager manager;
     private final String[] data;
-    private String prevEntry;
+    private String prevEntry = null;
 
-    public UpdateCommand(EmployeeManager employeeManager, String idx, String data1) {
+    public UpdateCommand(EmployeeManager employeeManager, String input) {
         this.manager = employeeManager;
-        this.data = new String[]{idx,data1};
-    }
-
-    public UpdateCommand(EmployeeManager employeeManager, String idx,
-                         String data1, String data2) {
-        this.manager = employeeManager;
-        this.data = new String[]{idx,data1,data2};
-    }
-
-    public UpdateCommand(EmployeeManager employeeManager, String idx,
-                         String data1, String data2, String data3) {
-        this.manager = employeeManager;
-        this.data = new String[]{idx,data1,data2,data3};
+        this.data = input.split(" ");
     }
 
     @Override
     public void execute() throws CustomException {
+        if (data.length < 2)
+            throw new CustomException("Error: Update needs at least 2 inputs");
+        if (data.length > 4)
+            throw new CustomException("Error: Update needs at most 4 inputs");
         prevEntry = manager.update(data);
     }
 
     @Override
     public void undo() throws CustomException {
+        if (prevEntry == null || data.length == 0)
+            throw new CustomException("Error: Cannot undo");
         manager.delete(data[0]);
         manager.insert(data[0], prevEntry);
     }

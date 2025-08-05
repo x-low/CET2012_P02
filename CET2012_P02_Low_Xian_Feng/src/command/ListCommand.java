@@ -3,8 +3,6 @@ package command;
 import core.CustomException;
 import core.EmployeeManager;
 
-import java.util.Stack;
-
 public class ListCommand implements Command {
     private final EmployeeManager manager;
 

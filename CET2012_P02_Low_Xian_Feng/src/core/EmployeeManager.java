@@ -1,9 +1,7 @@
 package core;
 
-import command.Command;
-
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.NoSuchElementException;
 
 public class EmployeeManager {
     private final EmployeeRegistry registry;
@@ -35,16 +33,28 @@ public class EmployeeManager {
         dataStore.add(line);
     }
 
-    public void deleteLastEntry() {
+    public void deleteLastEntry() throws CustomException {
         ArrayList<String> dataStore = this.registry.getDataStore();
-        dataStore.removeLast();
+        try {
+            dataStore.removeLast();
+        } catch (NoSuchElementException e) {
+            throw new CustomException("Error: Nothing to delete");
+        }
     }
 
-    public String delete(String index) {
+    public String delete(String index) throws CustomException {
         ArrayList<String> dataStore = this.registry.getDataStore();
-        int idx = Integer.parseInt(index);
-        String deletedEntry = dataStore.get(idx - 1);
-        dataStore.remove(idx - 1);
+        int idx;
+        String deletedEntry;
+        try {
+            idx = Integer.parseInt(index);
+            deletedEntry = dataStore.get(idx - 1);
+            dataStore.remove(idx - 1);
+        } catch (NumberFormatException e) {
+            throw new CustomException("Error: Index must be positive number");
+        } catch (IndexOutOfBoundsException e) {
+            throw new CustomException("Error: Index entry does not exist");
+        }
         for (int i = idx - 1; i < dataStore.size(); i++) {
             String entry = dataStore.get(i);
             String[] split = entry.split("\\.");
@@ -54,10 +64,17 @@ public class EmployeeManager {
         return (deletedEntry);
     }
 
-    public void insert(String index, String data) {
+    public void insert(String index, String data) throws CustomException {
         ArrayList<String> dataStore = this.registry.getDataStore();
-        int idx = Integer.parseInt(index);
-        dataStore.add(idx - 1, data);
+        int idx;
+        try {
+            idx = Integer.parseInt(index);
+            dataStore.add(idx - 1, data);
+        } catch (NumberFormatException e) {
+                throw new CustomException("Error: Index must be positive number");
+        } catch (IndexOutOfBoundsException e) {
+                throw new CustomException("Error: Cannot insert at index");
+        }
         for (int i = idx; i < dataStore.size(); i++) {
             String entry = dataStore.get(i);
             String[] split = entry.split("\\.");
@@ -71,14 +88,24 @@ public class EmployeeManager {
         if (dataStore.isEmpty())
             throw new CustomException("Error: Nothing to list");
         dataStore.forEach(System.out::println);
+        System.out.println();
     }
 
-    public String update(String[] data) {
+    public String update(String[] data) throws CustomException {
         ArrayList<String> dataStore = this.registry.getDataStore();
-        int idx = Integer.parseInt(data[0]);
-        String entry = dataStore.get(idx - 1);
-        String[] split = entry.split(" ");
-        String newEntry = String.format("%02d. ", idx) + data[1];
+        int idx;
+        String entry, newEntry;
+        String[] split;
+        try {
+            idx = Integer.parseInt(data[0]);
+            entry = dataStore.get(idx - 1);
+            split = entry.split(" ");
+            newEntry = String.format("%02d. ", idx) + data[1];
+        } catch (NumberFormatException e) {
+            throw new CustomException("Error: Index must be positive number");
+        } catch (IndexOutOfBoundsException e) {
+            throw new CustomException("Error: Index entry does not exist");
+        }
         if (data.length > 2)
             newEntry += " " + data[2];
         else

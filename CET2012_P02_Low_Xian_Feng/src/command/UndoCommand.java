@@ -2,7 +2,6 @@ package command;
 
 import core.CustomException;
 import core.EmployeeManager;
-
 import java.util.Stack;
 
 public class UndoCommand implements Command {

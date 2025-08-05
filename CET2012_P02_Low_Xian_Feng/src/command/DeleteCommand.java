@@ -2,9 +2,6 @@ package command;
 
 import core.CustomException;
 import core.EmployeeManager;
-import core.EmployeeRegistry;
-
-import java.util.Stack;
 
 public class DeleteCommand implements Command {
     private final EmployeeManager manager;
@@ -12,16 +9,18 @@ public class DeleteCommand implements Command {
     private String deletedEntry;
 
     public DeleteCommand(EmployeeManager employeeManager, String idx) {
-        manager = employeeManager;
-        index = idx;
+        this.manager = employeeManager;
+        this.index = idx;
     }
 
     @Override
     public void execute() throws CustomException {
+        if (this.index.split(" ").length != 1)
+            throw new CustomException("Error: Delete only requires one input");
         deletedEntry = manager.delete(index);
     }
 
-    public void undo() {
+    public void undo() throws CustomException {
         manager.insert(index, deletedEntry);
     }
 
