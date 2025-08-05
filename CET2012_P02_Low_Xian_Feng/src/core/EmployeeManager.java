@@ -72,5 +72,4 @@ public class EmployeeManager {
             throw new CustomException("Error: Nothing to list");
         dataStore.forEach(System.out::println);
     }
-
 }
