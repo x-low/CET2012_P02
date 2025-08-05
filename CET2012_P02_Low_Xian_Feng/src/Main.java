@@ -10,11 +10,6 @@ public class Main {
             System.out.println(e.getMessage());
             return ;
         }
-        registry.add(new String[]{"first", "last", "email"});
-        registry.add(new String[]{"second", "last", "email"});
-        registry.add(new String[]{"third", "last", "email"});
-        registry.delete(null, "2");
-
         try {
             registry.storeToFile();
         } catch (CustomException e) {

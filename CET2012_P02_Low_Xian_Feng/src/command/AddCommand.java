@@ -1,27 +1,28 @@
 package command;
 
 import core.CustomException;
+import core.EmployeeManager;
 import core.EmployeeRegistry;
 import java.util.Stack;
 
 public class AddCommand implements Command {
-    private final EmployeeRegistry registry;
+    private final EmployeeManager manager;
     private final String[] data;
 
-    public AddCommand(EmployeeRegistry registry,
+    public AddCommand(EmployeeManager employeeManager,
                       String data1, String data2, String data3) {
-        this.registry = registry;
+        this.manager = employeeManager;
         this.data = new String[]{data1, data2, data3};
     }
 
     @Override
     public void execute(Stack<Command> history) throws CustomException {
-        registry.add(data);
+        manager.add(data);
         history.push(this);
     }
 
     @Override
     public void undo() {
-        registry.deleteLastEntry();
+        manager.deleteLastEntry();
     }
 }
