@@ -16,8 +16,7 @@ public class Invoker {
 				cmd.execute();
 				if (cmd.canUndo())
 					history.push(cmd);
-			} catch (IndexOutOfBoundsException | NullPointerException |
-					CustomException e) {
+			} catch (CustomException e) {
 				System.out.println(e.getMessage());
 			}
 		}
