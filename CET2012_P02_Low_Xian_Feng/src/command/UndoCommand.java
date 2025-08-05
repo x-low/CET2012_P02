@@ -1,24 +1,21 @@
 package command;
-import command.Command;
+
 import core.CustomException;
-import core.EmployeeRegistry;
+import core.EmployeeManager;
+
 
 import java.util.Stack;
 
 public class UndoCommand implements Command {
-    private final EmployeeRegistry registry;
+    private final EmployeeManager manager;
 
-    public UndoCommand(EmployeeRegistry registry) {
-        this.registry = registry;
+    public UndoCommand(EmployeeManager employeeManager) {
+        this.manager = employeeManager;
     }
 
     @Override
     public void execute(Stack<Command> history) throws CustomException {
-        if (history.isEmpty())
-            throw new CustomException("Error: Nothing to undo");
-
-        Command prevCommand = history.pop();
-        prevCommand.undo();
+        manager.undo(history);
     }
 
     @Override

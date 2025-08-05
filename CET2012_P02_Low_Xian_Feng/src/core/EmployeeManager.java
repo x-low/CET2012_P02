@@ -1,6 +1,9 @@
 package core;
 
+import command.Command;
+
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class EmployeeManager {
     private final EmployeeRegistry registry;
@@ -55,4 +58,12 @@ public class EmployeeManager {
             System.out.println(e.getMessage());
         }
     }
+
+    public void undo(Stack<Command> history) throws CustomException {
+        if (history.isEmpty())
+            throw new CustomException("Error: Nothing to undo");
+        Command prevCommand = history.pop();
+        prevCommand.undo();
+    }
+
 }
