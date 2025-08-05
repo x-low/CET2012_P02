@@ -72,4 +72,28 @@ public class EmployeeManager {
             throw new CustomException("Error: Nothing to list");
         dataStore.forEach(System.out::println);
     }
+
+    public String update(String[] data) {
+        ArrayList<String> dataStore = this.registry.getDataStore();
+        try {
+            int idx = Integer.parseInt(data[0]);
+            String entry = dataStore.get(idx - 1);
+            String[] split = entry.split(" ");
+            String newEntry = String.format("%02d. ", idx) + data[1];
+            if (data.length > 2)
+                newEntry += " " + data[2];
+            else
+                newEntry += " " + split[2];
+            if (data.length > 3)
+                newEntry += " " + data[3];
+            else
+                newEntry += " " + split[3];
+            this.delete(data[0]);
+            this.insert(data[0],  newEntry);
+            return (entry);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
