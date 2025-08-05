@@ -30,6 +30,7 @@ public class UpdateCommand implements Command {
     @Override
     public void execute(Stack<Command> history) throws CustomException {
         prevEntry = manager.update(data);
+        history.push(this);
     }
 
     @Override
