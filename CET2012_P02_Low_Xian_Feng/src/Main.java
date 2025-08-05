@@ -19,8 +19,8 @@ public class Main {
         manager = new EmployeeManager(registry);
         Command[] payload = new Command[]{new AddCommand(manager, "first", "first", "email"),
                 new AddCommand(manager, "Second", "sEcOnD", "email"),
-                new UpdateCommand(manager, "4", "uh", "what?"),
                 new AddCommand(manager, "THIRD", "ThIRd", "email"),
+                new DeleteCommand(manager, "1"),
                 new ListCommand(manager)
         };
 

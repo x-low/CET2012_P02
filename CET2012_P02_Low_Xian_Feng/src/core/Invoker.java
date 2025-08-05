@@ -14,7 +14,8 @@ public class Invoker {
 		for (Command cmd: cmdToExecute) {
 			try {
 				cmd.execute(history);
-			} catch (CustomException e) {
+			} catch (IndexOutOfBoundsException | NullPointerException |
+					CustomException e) {
 				System.out.println(e.getMessage());
 			}
 		}

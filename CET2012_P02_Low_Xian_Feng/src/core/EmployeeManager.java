@@ -42,36 +42,27 @@ public class EmployeeManager {
 
     public String delete(String index) {
         ArrayList<String> dataStore = this.registry.getDataStore();
-        try {
-            int idx = Integer.parseInt(index);
-            String deletedEntry = dataStore.get(idx - 1);
-            dataStore.remove(idx - 1);
-            for (int i = idx - 1; i < dataStore.size(); i++) {
-                String entry = dataStore.get(i);
-                String[] split = entry.split("\\.");
-                String newEntry = String.format("%02d.", idx) + split[1];
-                dataStore.set(i, newEntry);
-            }
-            return (deletedEntry);
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println(e.getMessage());
+        int idx = Integer.parseInt(index);
+        String deletedEntry = dataStore.get(idx - 1);
+        dataStore.remove(idx - 1);
+        for (int i = idx - 1; i < dataStore.size(); i++) {
+            String entry = dataStore.get(i);
+            String[] split = entry.split("\\.");
+            String newEntry = String.format("%02d.", i + 1) + split[1];
+            dataStore.set(i, newEntry);
         }
-        return null;
+        return (deletedEntry);
     }
 
     public void insert(String index, String data) {
         ArrayList<String> dataStore = this.registry.getDataStore();
-        try {
-            int idx = Integer.parseInt(index);
-            dataStore.add(idx - 1, toTitleCase(data));
-            for (int i = idx; i < dataStore.size(); i++) {
-                String entry = dataStore.get(i);
-                String[] split = entry.split("\\.");
-                String newEntry = String.format("%02d.", i + 1) + split[1];
-                dataStore.set(i, newEntry);
-            }
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println(e.getMessage());
+        int idx = Integer.parseInt(index);
+        dataStore.add(idx - 1, data);
+        for (int i = idx; i < dataStore.size(); i++) {
+            String entry = dataStore.get(i);
+            String[] split = entry.split("\\.");
+            String newEntry = String.format("%02d.", i + 1) + split[1];
+            dataStore.set(i, newEntry);
         }
     }
 
@@ -91,26 +82,21 @@ public class EmployeeManager {
 
     public String update(String[] data) {
         ArrayList<String> dataStore = this.registry.getDataStore();
-        try {
-            int idx = Integer.parseInt(data[0]);
-            String entry = dataStore.get(idx - 1);
-            String[] split = entry.split(" ");
-            String newEntry = String.format("%02d. ", idx) + data[1];
-            if (data.length > 2)
-                newEntry += " " + data[2];
-            else
-                newEntry += " " + split[2];
-            newEntry = toTitleCase(newEntry);
-            if (data.length > 3)
-                newEntry += " " + data[3];
-            else
-                newEntry += " " + split[3];
-            this.delete(data[0]);
-            this.insert(data[0],  newEntry);
-            return (entry);
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            System.out.println(e.getMessage());
-        }
-        return (null);
+        int idx = Integer.parseInt(data[0]);
+        String entry = dataStore.get(idx - 1);
+        String[] split = entry.split(" ");
+        String newEntry = String.format("%02d. ", idx) + data[1];
+        if (data.length > 2)
+            newEntry += " " + data[2];
+        else
+            newEntry += " " + split[2];
+        newEntry = toTitleCase(newEntry);
+        if (data.length > 3)
+            newEntry += " " + data[3];
+        else
+            newEntry += " " + split[3];
+        this.delete(data[0]);
+        this.insert(data[0],  newEntry);
+        return (entry);
     }
 }
