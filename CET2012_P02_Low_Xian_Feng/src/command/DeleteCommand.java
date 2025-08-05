@@ -17,12 +17,16 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(Stack<Command> history) throws CustomException {
+    public void execute() throws CustomException {
         deletedEntry = manager.delete(index);
-        history.push(this);
     }
 
     public void undo() {
         manager.insert(index, deletedEntry);
+    }
+
+    @Override
+    public boolean canUndo() {
+        return true;
     }
 }

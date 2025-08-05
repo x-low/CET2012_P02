@@ -28,14 +28,18 @@ public class UpdateCommand implements Command {
     }
 
     @Override
-    public void execute(Stack<Command> history) throws CustomException {
+    public void execute() throws CustomException {
         prevEntry = manager.update(data);
-        history.push(this);
     }
 
     @Override
     public void undo() throws CustomException {
         manager.delete(data[0]);
         manager.insert(data[0], prevEntry);
+    }
+
+    @Override
+    public boolean canUndo() {
+        return true;
     }
 }

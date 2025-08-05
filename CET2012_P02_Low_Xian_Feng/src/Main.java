@@ -29,7 +29,7 @@ public class Main {
                 new ListCommand(manager),
                 new DeleteCommand(manager, "1"),
                 new ListCommand(manager),
-                new UndoCommand(manager),
+                new UndoCommand(manager, history),
                 new ListCommand(manager)
         };
 

@@ -66,13 +66,6 @@ public class EmployeeManager {
         }
     }
 
-    public void undo(Stack<Command> history) throws CustomException {
-        if (history.isEmpty())
-            throw new CustomException("Error: Nothing to undo");
-        Command prevCommand = history.pop();
-        prevCommand.undo();
-    }
-
     public void list() throws CustomException {
         ArrayList<String> dataStore = this.registry.getDataStore();
         if (dataStore.isEmpty())

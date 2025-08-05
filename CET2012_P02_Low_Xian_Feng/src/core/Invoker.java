@@ -13,7 +13,9 @@ public class Invoker {
 	public void executeCommand(Stack<Command> history) {
 		for (Command cmd: cmdToExecute) {
 			try {
-				cmd.execute(history);
+				cmd.execute();
+				if (cmd.canUndo())
+					history.push(cmd);
 			} catch (IndexOutOfBoundsException | NullPointerException |
 					CustomException e) {
 				System.out.println(e.getMessage());

@@ -13,7 +13,7 @@ public class ListCommand implements Command {
     }
 
     @Override
-    public void execute(Stack<Command> history) throws CustomException {
+    public void execute() throws CustomException {
         manager.list();
     }
 
@@ -22,4 +22,8 @@ public class ListCommand implements Command {
         throw new UnsupportedOperationException("Error: Cannot undo");
     }
 
+    @Override
+    public boolean canUndo() {
+        return false;
+    }
 }

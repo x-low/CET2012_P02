@@ -16,13 +16,17 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void execute(Stack<Command> history) throws CustomException {
+    public void execute() throws CustomException {
         manager.add(data);
-        history.push(this);
     }
 
     @Override
     public void undo() {
         manager.deleteLastEntry();
+    }
+
+    @Override
+    public boolean canUndo() {
+        return true;
     }
 }
