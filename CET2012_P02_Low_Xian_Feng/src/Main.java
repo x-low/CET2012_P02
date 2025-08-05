@@ -17,10 +17,19 @@ public class Main {
             return ;
         }
         manager = new EmployeeManager(registry);
-        Command[] payload = new Command[]{new AddCommand(manager, "first", "first", "email"),
-                new AddCommand(manager, "Second", "sEcOnD", "email"),
-                new AddCommand(manager, "THIRD", "ThIRd", "email"),
+        Command[] payload = new Command[]{
+                new AddCommand(manager, "first_name", "last_name", "email"),
+                new AddCommand(manager, "john", "Doe", "email"),
+                new AddCommand(manager, "hanna", "moon", "email"),
+                new AddCommand(manager, "ah", "boon", "email"),
+                new ListCommand(manager),
+                new UpdateCommand(manager, "3", "adam"),
+                new ListCommand(manager),
+                new UpdateCommand(manager, "1", "blue", "bell", "ice-cream"),
+                new ListCommand(manager),
                 new DeleteCommand(manager, "1"),
+                new ListCommand(manager),
+                new UndoCommand(manager),
                 new ListCommand(manager)
         };
 
