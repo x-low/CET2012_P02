@@ -12,11 +12,26 @@ public class EmployeeManager {
         this.registry = employeeRegistry;
     }
 
+    private String toTitleCase(String str) {
+        StringBuilder sb = new StringBuilder();
+        boolean nextUpperCase = true;
+        for (char c : str.toCharArray()) {
+            if (Character.isSpaceChar(c))
+                nextUpperCase = true;
+            else if (nextUpperCase) {
+                c = Character.toUpperCase(c);
+                nextUpperCase = false;
+            }
+            sb.append(c);
+        }
+        return (sb.toString());
+    }
+
     public void add(String[] data) {
         ArrayList<String> dataStore = this.registry.getDataStore();
         String line = String.format("%02d", dataStore.size() + 1) +
                 ". " + data[0] + " " + data[1] + " " + data[2];
-        dataStore.add(line);
+        dataStore.add(toTitleCase(line));
     }
 
     public void deleteLastEntry() {
@@ -47,7 +62,7 @@ public class EmployeeManager {
         ArrayList<String> dataStore = this.registry.getDataStore();
         try {
             int idx = Integer.parseInt(index);
-            dataStore.add(idx - 1, data);
+            dataStore.add(idx - 1, toTitleCase(data));
             for (int i = idx; i < dataStore.size(); i++) {
                 String entry = dataStore.get(i);
                 String[] split = entry.split("\\.");
@@ -89,7 +104,7 @@ public class EmployeeManager {
             else
                 newEntry += " " + split[3];
             this.delete(data[0]);
-            this.insert(data[0],  newEntry);
+            this.insert(data[0],  toTitleCase(newEntry));
             return (entry);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             System.out.println(e.getMessage());
