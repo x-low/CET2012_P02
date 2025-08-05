@@ -10,20 +10,20 @@ public class UpdateCommand implements Command {
     private final String[] data;
     private String prevEntry;
 
-    public UpdateCommand(EmployeeManager manager, String idx, String data1) {
-        this.manager = manager;
+    public UpdateCommand(EmployeeManager employeeManager, String idx, String data1) {
+        this.manager = employeeManager;
         this.data = new String[]{idx,data1};
     }
 
-    public UpdateCommand(EmployeeManager manager, String idx,
+    public UpdateCommand(EmployeeManager employeeManager, String idx,
                          String data1, String data2) {
-        this.manager = manager;
+        this.manager = employeeManager;
         this.data = new String[]{idx,data1,data2};
     }
 
-    public UpdateCommand(EmployeeManager manager, String idx,
+    public UpdateCommand(EmployeeManager employeeManager, String idx,
                          String data1, String data2, String data3) {
-        this.manager = manager;
+        this.manager = employeeManager;
         this.data = new String[]{idx,data1,data2,data3};
     }
 

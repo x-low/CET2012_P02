@@ -94,6 +94,6 @@ public class EmployeeManager {
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             System.out.println(e.getMessage());
         }
+        return (null);
     }
-
 }
