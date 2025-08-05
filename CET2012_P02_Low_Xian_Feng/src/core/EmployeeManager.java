@@ -30,8 +30,9 @@ public class EmployeeManager {
     public void add(String[] data) {
         ArrayList<String> dataStore = this.registry.getDataStore();
         String line = String.format("%02d", dataStore.size() + 1) +
-                ". " + data[0] + " " + data[1] + " " + data[2];
-        dataStore.add(toTitleCase(line));
+                ". " + data[0] + " " + data[1];
+        line = toTitleCase(line) + " " + data[2];
+        dataStore.add(line);
     }
 
     public void deleteLastEntry() {
@@ -99,12 +100,13 @@ public class EmployeeManager {
                 newEntry += " " + data[2];
             else
                 newEntry += " " + split[2];
+            newEntry = toTitleCase(newEntry);
             if (data.length > 3)
                 newEntry += " " + data[3];
             else
                 newEntry += " " + split[3];
             this.delete(data[0]);
-            this.insert(data[0],  toTitleCase(newEntry));
+            this.insert(data[0],  newEntry);
             return (entry);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             System.out.println(e.getMessage());
