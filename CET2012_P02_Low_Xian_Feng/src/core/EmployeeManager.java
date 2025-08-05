@@ -66,4 +66,11 @@ public class EmployeeManager {
         prevCommand.undo();
     }
 
+    public void list() throws CustomException {
+        ArrayList<String> dataStore = this.registry.getDataStore();
+        if (dataStore.isEmpty())
+            throw new CustomException("Error: Nothing to list");
+        dataStore.forEach(System.out::println);
+    }
+
 }
