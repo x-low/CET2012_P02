@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class EmployeeManager {
-    private final EmployeeRegistry registry;
+    private final FileHandler fileHandler;
 
-    public EmployeeManager(EmployeeRegistry employeeRegistry) {
-        this.registry = employeeRegistry;
+    public EmployeeManager() {
+        this.fileHandler = new FileHandler();
+    }
+
+    public void storeToFile() {
+        fileHandler.storeToFile();
     }
 
     public void add(String[] data) throws CustomException {
         if (ManagerTools.isLatinEmail(data[2]))
             data[2] = ManagerTools.toTitleCase(data[2]);
-        ArrayList<String> dataStore = this.registry.getDataStore();
+        ArrayList<String> dataStore = this.fileHandler.getDataStore();
         String line = String.format("%02d", dataStore.size() + 1) +
                 ". " + data[0] + " " + data[1];
         line = ManagerTools.toTitleCase(line) + " " + data[2];
@@ -21,7 +25,7 @@ public class EmployeeManager {
     }
 
     public void deleteLastEntry() throws CustomException {
-        ArrayList<String> dataStore = this.registry.getDataStore();
+        ArrayList<String> dataStore = this.fileHandler.getDataStore();
         try {
             dataStore.removeLast();
         } catch (NoSuchElementException e) {
@@ -30,7 +34,7 @@ public class EmployeeManager {
     }
 
     public String delete(String index) throws CustomException {
-        ArrayList<String> dataStore = this.registry.getDataStore();
+        ArrayList<String> dataStore = this.fileHandler.getDataStore();
         int idx;
         String deletedEntry;
         try {
@@ -52,7 +56,7 @@ public class EmployeeManager {
     }
 
     public void insert(String index, String data) throws CustomException {
-        ArrayList<String> dataStore = this.registry.getDataStore();
+        ArrayList<String> dataStore = this.fileHandler.getDataStore();
         int idx;
         try {
             idx = Integer.parseInt(index);
@@ -71,7 +75,7 @@ public class EmployeeManager {
     }
 
     public void list() throws CustomException {
-        ArrayList<String> dataStore = this.registry.getDataStore();
+        ArrayList<String> dataStore = this.fileHandler.getDataStore();
         if (dataStore.isEmpty())
             throw new CustomException("Error: Nothing to list");
         dataStore.forEach(System.out::println);
@@ -79,7 +83,7 @@ public class EmployeeManager {
     }
 
     public String update(String[] data) throws CustomException {
-        ArrayList<String> dataStore = this.registry.getDataStore();
+        ArrayList<String> dataStore = this.fileHandler.getDataStore();
         int idx;
         String entry, newEntry;
         String[] split;

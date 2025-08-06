@@ -1,20 +1,17 @@
 package core;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
-public class EmployeeRegistry {
+public class FileHandler {
     private ArrayList<String> dataStore;
     private static final String dataStorePath =
-            System.getProperty("user.dir") +
-                    "/CET2012_P02_Low_Xian_Feng/src/dataStore.txt";
+            System.getProperty("user.dir") + "/src/dataStore.txt";
 
-    public EmployeeRegistry() {
+    public FileHandler() {
         Path data = Paths.get(dataStorePath);
 
         if (!Files.exists(data))

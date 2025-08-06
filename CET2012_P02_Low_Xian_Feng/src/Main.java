@@ -6,8 +6,7 @@ import java.util.Stack;
 public class Main {
 
     public static void main(String[] args) {
-        EmployeeRegistry registry = new EmployeeRegistry();
-        EmployeeManager manager = new EmployeeManager(registry);
+        EmployeeManager manager = new EmployeeManager();
         Invoker invoker = new Invoker();
         Stack<Command> history = new Stack<Command>();
         Command[] payload = new Command[]{
@@ -30,6 +29,6 @@ public class Main {
         invoker.executeCommand(history);
         System.out.println(history.toString());
 
-        registry.storeToFile();
+        manager.storeToFile();
     }
 }
