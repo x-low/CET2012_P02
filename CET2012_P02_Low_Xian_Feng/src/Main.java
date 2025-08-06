@@ -22,14 +22,11 @@ public class Main {
                 new AddCommand(manager, "john Doe with-dash@email.sg"),
                 new AddCommand(manager, "hanna moon wh_ats.th-at@gmail.com"),
                 new AddCommand(manager, "ah boon .doesntwork@gmail.com"),
-                new ListCommand(manager),
-                new UpdateCommand(manager, "3 adam"),
-                new ListCommand(manager),
-                new UpdateCommand(manager, "1 blue bell ice-cream"),
-                new ListCommand(manager),
-                new DeleteCommand(manager, "1"),
-                new ListCommand(manager),
-                new UndoCommand(manager, history),
+                new AddCommand(manager, "one one latincase"),
+                new AddCommand(manager, "two two 0numberfirst"),
+                new AddCommand(manager, "three three ____"),
+                new UpdateCommand(manager, "1 first last .invalid@gmail.com"),
+                new UpdateCommand(manager, "2 another try validonethistime"),
                 new ListCommand(manager)
         };
 

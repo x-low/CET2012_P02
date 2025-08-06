@@ -24,13 +24,20 @@ public class ManagerTools {
         return (sb.toString());
     }
 
-    public static boolean invalidEmail(String email) {
-        Matcher matcher = emailPolicy.matcher(email);
-        return (!matcher.matches());
-    }
-
-    public static boolean isLatinEmail(String email) {
+    /**
+     * Checks if input follows email format or latin format
+     * @param email Email to be checked
+     * @return True for latin format, false for email format
+     * @throws CustomException Thrown if email provided is neither valid
+     * latin nor email format
+     */
+    public static boolean isLatinEmail(String email) throws CustomException {
         Matcher matcher = latinEmail.matcher(email);
-        return (matcher.matches());
+        if (matcher.matches())
+            return true;
+        matcher = emailPolicy.matcher(email);
+        if (matcher.matches())
+            return false;
+        throw new CustomException("Error: Invalid email format");
     }
 }

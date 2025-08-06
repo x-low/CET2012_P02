@@ -11,8 +11,8 @@ public class EmployeeManager {
     }
 
     public void add(String[] data) throws CustomException {
-        if (ManagerTools.invalidEmail(data[2]))
-            throw new CustomException("Error: Invalid email format");
+        if (ManagerTools.isLatinEmail(data[2]))
+            data[2] = ManagerTools.toTitleCase(data[2]);
         ArrayList<String> dataStore = this.registry.getDataStore();
         String line = String.format("%02d", dataStore.size() + 1) +
                 ". " + data[0] + " " + data[1];
@@ -99,8 +99,8 @@ public class EmployeeManager {
             newEntry += " " + split[2];
         newEntry = ManagerTools.toTitleCase(newEntry);
         if (data.length > 3) {
-            if (ManagerTools.invalidEmail(data[3]))
-                throw new CustomException("Error: Invalid email format");
+            if (ManagerTools.isLatinEmail(data[3]))
+                data[3] = ManagerTools.toTitleCase(data[3]);
             newEntry += " " + data[3];
         }
         else
