@@ -13,7 +13,6 @@ public class EmployeeRegistry {
     private static final String dataStorePath =
             System.getProperty("user.dir") +
                     "/CET2012_P02_Low_Xian_Feng/src/dataStore.txt";
-    // try local regex portion ^[^.\-](?!.*[.\-]{2})[\w.\-]*(?<![.\-])$
 
     public EmployeeRegistry() throws CustomException {
         dataStore = new ArrayList<>();

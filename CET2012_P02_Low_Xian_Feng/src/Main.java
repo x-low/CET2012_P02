@@ -18,10 +18,10 @@ public class Main {
         }
         manager = new EmployeeManager(registry);
         Command[] payload = new Command[]{
-                new AddCommand(manager, "first_name last_name email"),
-                new AddCommand(manager, "john Doe email"),
-                new AddCommand(manager, "hanna moon email"),
-                new AddCommand(manager, "ah boon email"),
+                new AddCommand(manager, "first_name last_name valid@gmail.com"),
+                new AddCommand(manager, "john Doe with-dash@email.sg"),
+                new AddCommand(manager, "hanna moon wh_ats.th-at@gmail.com"),
+                new AddCommand(manager, "ah boon .doesntwork@gmail.com"),
                 new ListCommand(manager),
                 new UpdateCommand(manager, "3 adam"),
                 new ListCommand(manager),

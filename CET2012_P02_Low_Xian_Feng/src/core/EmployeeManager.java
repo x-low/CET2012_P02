@@ -10,26 +10,13 @@ public class EmployeeManager {
         this.registry = employeeRegistry;
     }
 
-    private String toTitleCase(String str) {
-        StringBuilder sb = new StringBuilder();
-        boolean nextUpperCase = true;
-        for (char c : str.toCharArray()) {
-            if (Character.isSpaceChar(c))
-                nextUpperCase = true;
-            else if (nextUpperCase) {
-                c = Character.toUpperCase(c);
-                nextUpperCase = false;
-            }
-            sb.append(c);
-        }
-        return (sb.toString());
-    }
-
-    public void add(String[] data) {
+    public void add(String[] data) throws CustomException {
+        if (ManagerTools.invalidEmail(data[2]))
+            throw new CustomException("Error: Invalid email format");
         ArrayList<String> dataStore = this.registry.getDataStore();
         String line = String.format("%02d", dataStore.size() + 1) +
                 ". " + data[0] + " " + data[1];
-        line = toTitleCase(line) + " " + data[2];
+        line = ManagerTools.toTitleCase(line) + " " + data[2];
         dataStore.add(line);
     }
 
@@ -88,6 +75,7 @@ public class EmployeeManager {
         if (dataStore.isEmpty())
             throw new CustomException("Error: Nothing to list");
         dataStore.forEach(System.out::println);
+        System.out.println();
     }
 
     public String update(String[] data) throws CustomException {
@@ -109,9 +97,12 @@ public class EmployeeManager {
             newEntry += " " + data[2];
         else
             newEntry += " " + split[2];
-        newEntry = toTitleCase(newEntry);
-        if (data.length > 3)
+        newEntry = ManagerTools.toTitleCase(newEntry);
+        if (data.length > 3) {
+            if (ManagerTools.invalidEmail(data[3]))
+                throw new CustomException("Error: Invalid email format");
             newEntry += " " + data[3];
+        }
         else
             newEntry += " " + split[3];
         this.delete(data[0]);
