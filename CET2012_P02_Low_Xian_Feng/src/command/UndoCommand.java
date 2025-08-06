@@ -22,8 +22,8 @@ public class UndoCommand implements Command {
     }
 
     @Override
-    public void undo() {
-        throw new UnsupportedOperationException("Error: Cannot undo");
+    public void undo() throws  CustomException {
+        throw new CustomException("Error: Cannot undo");
     }
 
     @Override
