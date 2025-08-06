@@ -1,64 +1,45 @@
 package core;
 
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
 public class EmployeeRegistry {
-    private final ArrayList<String> dataStore;
+    private ArrayList<String> dataStore;
     private static final String dataStorePath =
             System.getProperty("user.dir") +
                     "/CET2012_P02_Low_Xian_Feng/src/dataStore.txt";
 
-    public EmployeeRegistry() throws CustomException {
-        dataStore = new ArrayList<>();
-        File data =  new File(dataStorePath);
+    public EmployeeRegistry() {
+        Path data = Paths.get(dataStorePath);
 
-        if (!data.exists())
-            return ;
-        if (!data.isFile())
-            throw new CustomException(
-                    "Error: Existing dataStore.txt is not a file"
-            );
-        if (!data.canRead())
-            throw new CustomException("Error: Cannot read existing datastore");
-
-        try (BufferedReader br = new BufferedReader(new FileReader(data))) {
-            String line;
-            while ((line = br.readLine()) != null)
-                dataStore.add(line);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+        if (!Files.exists(data))
+            dataStore = new ArrayList<>();
+        else {
+            try {
+                dataStore = (ArrayList<String>) Files.readAllLines(data);
+            } catch (IOException e) {
+                System.out.println("Error: Cannot read existing datastore");
+                dataStore = new ArrayList<>();
+            }
         }
     }
 
-    public void storeToFile() throws CustomException {
-        File data = new File(dataStorePath);
+    public void storeToFile() {
+        Path data = Paths.get(dataStorePath);
 
         try {
-            if (!data.exists() && !data.createNewFile())
-                throw new CustomException("Error: Cannot create datastore");
-            if (!data.canWrite())
-                throw new CustomException("Error: Cannot write to datastore");
-
-            try (BufferedWriter bw = new BufferedWriter(
-                    new FileWriter(data))) {
-                for (String line : dataStore) {
-                    bw.write(line);
-                    bw.newLine();
-                }
-            }
+            Files.write(data, dataStore);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error: Cannot write to datastore");
         }
     }
 
     ArrayList<String> getDataStore() {
         return (this.dataStore);
     }
-
 }

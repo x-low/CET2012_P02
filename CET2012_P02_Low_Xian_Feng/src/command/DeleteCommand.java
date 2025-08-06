@@ -6,7 +6,7 @@ import core.EmployeeManager;
 public class DeleteCommand implements Command {
     private final EmployeeManager manager;
     private final String index;
-    private String deletedEntry;
+    private String deletedEntry = null;
 
     public DeleteCommand(EmployeeManager employeeManager, String idx) {
         this.manager = employeeManager;
@@ -21,6 +21,8 @@ public class DeleteCommand implements Command {
     }
 
     public void undo() throws CustomException {
+        if (deletedEntry == null)
+            throw new CustomException("Error: Nothing to delete");
         manager.insert(index, deletedEntry);
     }
 

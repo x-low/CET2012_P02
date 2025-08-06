@@ -22,7 +22,7 @@ public class UndoCommand implements Command {
     }
 
     @Override
-    public void undo() throws  CustomException {
+    public void undo() throws CustomException {
         throw new CustomException("Error: Cannot undo");
     }
 
