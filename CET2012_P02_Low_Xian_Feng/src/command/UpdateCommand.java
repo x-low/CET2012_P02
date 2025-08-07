@@ -19,7 +19,13 @@ public class UpdateCommand implements Command {
             throw new CustomException("Error: Update needs at least 2 inputs");
         if (data.length > 4)
             throw new CustomException("Error: Update needs at most 4 inputs");
-        prevEntry = manager.update(data);
+        int idx;
+        try {
+            idx = Integer.parseInt(data[0]);
+        }  catch (NumberFormatException e) {
+            throw new CustomException("Error: Index must be positive integer");
+        }
+        prevEntry = manager.update(idx, data);
         System.out.println("update");
     }
 
@@ -27,8 +33,14 @@ public class UpdateCommand implements Command {
     public void undo() throws CustomException {
         if (prevEntry == null || data.length == 0)
             throw new CustomException("Error: Cannot undo");
-        manager.delete(data[0]);
-        manager.insert(data[0], prevEntry);
+        int idx;
+        try {
+            idx = Integer.parseInt(data[0]);
+        }  catch (NumberFormatException e) {
+            throw new CustomException("Error: Index must be positive integer");
+        }
+        manager.delete(idx);
+        manager.insert(idx, prevEntry);
     }
 
     @Override

@@ -13,7 +13,6 @@ public class ListCommand implements Command {
     @Override
     public void execute() throws CustomException {
         manager.list();
-        System.out.println("list");
     }
 
     @Override

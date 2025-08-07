@@ -17,14 +17,26 @@ public class DeleteCommand implements Command {
     public void execute() throws CustomException {
         if (this.index.split(" ").length != 1)
             throw new CustomException("Error: Delete only requires one input");
-        deletedEntry = manager.delete(index);
+        int idx;
+        try {
+            idx = Integer.parseInt(index);
+        }  catch (NumberFormatException e) {
+            throw new CustomException("Error: Index must be positive integer");
+        }
+        deletedEntry = manager.delete(idx);
         System.out.println("delete");
     }
 
     public void undo() throws CustomException {
         if (deletedEntry == null)
             throw new CustomException("Error: Nothing to delete");
-        manager.insert(index, deletedEntry);
+        int idx;
+        try {
+            idx = Integer.parseInt(index);
+        }  catch (NumberFormatException e) {
+            throw new CustomException("Error: Index must be positive integer");
+        }
+        manager.insert(idx, deletedEntry);
     }
 
     @Override
