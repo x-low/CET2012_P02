@@ -20,6 +20,7 @@ public class UpdateCommand implements Command {
         if (data.length > 4)
             throw new CustomException("Error: Update needs at most 4 inputs");
         prevEntry = manager.update(data);
+        System.out.println("update");
     }
 
     @Override

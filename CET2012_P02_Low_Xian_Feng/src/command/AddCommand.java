@@ -22,6 +22,7 @@ public class AddCommand implements Command {
     @Override
     public void undo() throws CustomException {
         manager.deleteLastEntry();
+        System.out.println("add");
     }
 
     @Override

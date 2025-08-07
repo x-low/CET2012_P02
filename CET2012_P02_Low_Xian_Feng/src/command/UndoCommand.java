@@ -19,6 +19,7 @@ public class UndoCommand implements Command {
             throw new CustomException("Error: Nothing to undo");
         Command prevCommand = history.pop();
         prevCommand.undo();
+        System.out.println("undo");
     }
 
     @Override

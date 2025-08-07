@@ -18,6 +18,7 @@ public class DeleteCommand implements Command {
         if (this.index.split(" ").length != 1)
             throw new CustomException("Error: Delete only requires one input");
         deletedEntry = manager.delete(index);
+        System.out.println("delete");
     }
 
     public void undo() throws CustomException {
