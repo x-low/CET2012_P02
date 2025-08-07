@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class ManagerTools {
     private static final Pattern emailPolicy =
-            Pattern.compile("^\\w(?!.*[.]{2})(?!.*[-]{2})[\\w.\\-]*" +
+            Pattern.compile("^\\w(?!.*[.\\-]{2})[\\w.\\-]*" +
                     "(?<![.\\-])@[a-zA-Z0-9][a-zA-Z0-9.\\-]*" +
                     "(?<![.\\-])(\\.[a-z]{2,3})$");
     private static final Pattern latinEmail =
