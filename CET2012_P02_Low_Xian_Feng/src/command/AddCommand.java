@@ -17,12 +17,12 @@ public class AddCommand implements Command {
         if (data.length != 3)
             throw new CustomException("Error: Add requires 3 inputs");
         manager.add(data);
+        System.out.println("add");
     }
 
     @Override
     public void undo() throws CustomException {
         manager.deleteLastEntry();
-        System.out.println("add");
     }
 
     @Override
