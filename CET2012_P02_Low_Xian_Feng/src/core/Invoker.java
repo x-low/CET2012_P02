@@ -13,6 +13,11 @@ public class Invoker {
 	private Command[] cmdToExecute;
 
 	/**
+	 * Constructs a default {@code Invoker}
+	 */
+	public Invoker() {}
+
+	/**
 	 * Accepts and stores commands to be executed
 	 * @param cmds {@code Command[]} commands to be executed
 	 */

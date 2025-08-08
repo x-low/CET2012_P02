@@ -1,10 +1,24 @@
+package driver;
+
 import command.*;
 import core.*;
 
 import java.util.Stack;
 
+/**
+ * driver.Main entrypoint for application
+ */
 public class Main {
 
+    /**
+     * Unused
+     */
+    private Main() {}
+
+    /**
+     * Entry point of program execution. Construct and run test cases here
+     * @param args Unused
+     */
     public static void main(String[] args) {
         EmployeeManager manager = new EmployeeManager();
         Invoker invoker = new Invoker();
