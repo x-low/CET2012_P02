@@ -52,8 +52,7 @@ public class AddCommand implements Command {
     }
 
     /**
-     * Returns {@code true} indicating undo functionality
-     * is not supported
+     * Returns {@code true} indicating undo functionality is supported
      * @return {@code true}
      */
     @Override
