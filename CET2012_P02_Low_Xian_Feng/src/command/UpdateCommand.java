@@ -20,6 +20,10 @@ public class UpdateCommand implements Command {
      * Entry that was replaced by execution of UpdateCommand
      */
     private String prevEntry = null;
+    /**
+     * Marks if command has already been executed
+     */
+    private boolean executed = false;
 
     /**
      * Constructs a {@code UpdateCommand} with the receiver and data fields
@@ -52,6 +56,7 @@ public class UpdateCommand implements Command {
         }
         prevEntry = manager.update(idx, data);
         System.out.println("update");
+        executed = true;
     }
 
     /**
@@ -60,6 +65,8 @@ public class UpdateCommand implements Command {
      */
     @Override
     public void undo() throws CustomException {
+        if (!executed)
+            throw new CustomException("Error: Cannot undo without executing");
         if (prevEntry == null || data.length == 0)
             throw new CustomException("Error: Cannot undo");
         int idx;
@@ -70,6 +77,7 @@ public class UpdateCommand implements Command {
         }
         manager.delete(idx);
         manager.insert(idx, prevEntry);
+        executed = false;
     }
 
     /**

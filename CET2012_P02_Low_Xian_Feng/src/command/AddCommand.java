@@ -16,6 +16,10 @@ public class AddCommand implements Command {
      * Input split into datafields by spaces
      */
     private final String[] data;
+    /**
+     * Marks if command has already been executed
+     */
+    private boolean executed = false;
 
     /**
      * Constructs an {@code AddCommand} with the receiver and entry to add.
@@ -39,16 +43,21 @@ public class AddCommand implements Command {
             throw new CustomException("Error: Add requires 3 inputs");
         manager.add(data);
         System.out.println("add");
+        executed = true;
     }
 
     /**
      * Undo the most recent add operation by removing the last entry
      * in the datastore
      * @throws CustomException if there is no entry to be removed
+     * or command has not yet been executed
      */
     @Override
     public void undo() throws CustomException {
+        if (!executed)
+            throw new CustomException("Error: Cannot undo without executing");
         manager.deleteLastEntry();
+        executed = false;
     }
 
     /**

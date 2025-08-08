@@ -20,6 +20,10 @@ public class DeleteCommand implements Command {
      * Previously deleted entry to be restored with {@code undo}
      */
     private String deletedEntry = null;
+    /**
+     * Marks if command has already been executed
+     */
+    private boolean executed = false;
 
     /**
      * Constructs a {@code DeleteCommand} with the receiver and entry number
@@ -49,6 +53,7 @@ public class DeleteCommand implements Command {
         }
         deletedEntry = manager.delete(idx);
         System.out.println("delete");
+        executed = true;
     }
 
     /**
@@ -56,6 +61,8 @@ public class DeleteCommand implements Command {
      * @throws CustomException if nothing was previously deleted
      */
     public void undo() throws CustomException {
+        if (!executed)
+            throw new CustomException("Error: Cannot undo without executing");
         if (deletedEntry == null)
             throw new CustomException("Error: Nothing to delete");
         int idx;
@@ -65,6 +72,7 @@ public class DeleteCommand implements Command {
             throw new CustomException("Error: Index must be positive integer");
         }
         manager.insert(idx, deletedEntry);
+        executed = false;
     }
 
     /**
