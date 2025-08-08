@@ -27,8 +27,8 @@ public class EmployeeManager {
     public void deleteLastEntry() throws CustomException {
         ArrayList<String> dataStore = this.fileHandler.getDataStore();
         try {
-            dataStore.removeLast();
-        } catch (NoSuchElementException e) {
+            dataStore.remove(dataStore.size() - 1);
+        } catch (IndexOutOfBoundsException e) {
             throw new CustomException("Error: Nothing to delete");
         }
     }
